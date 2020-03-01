@@ -16,10 +16,10 @@ class SideBar extends React.Component {
                         return (
                             <li 
                                 key={folder.id} 
-                                className={`${selectedFolder === folder.id ? "selected-class" : ""}`}
                             >
                                 <NavLink to=
-                                    {`/folder/${folder.id}`}>{folder.name}
+                                    {`/folder/${folder.id}`}
+                                    activeStyle={{color: 'red'}}>{folder.name}
                                 </NavLink>
                             </li>
                         )
@@ -27,7 +27,7 @@ class SideBar extends React.Component {
                 </ul>
                 <button onClick={() => <AddFolderForm />}>Add Folder</button>
             </div>
-            <Main notes={filteredNotes}/>
+            <Main filteredNotes={filteredNotes}/>
         </>
       )
     }

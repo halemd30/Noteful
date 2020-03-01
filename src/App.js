@@ -7,7 +7,7 @@ import Main from './main/Main';
 
 class App extends React.Component {
   render() {
-    // no im really playing in the demo branch!
+    // I'm in the demo branch!
     return (
       <div className='app'>
         <h1>
@@ -32,13 +32,6 @@ class App extends React.Component {
                   folders={STORE.folders}
                   notes={STORE.notes} 
                   {...props}
-                />}
-            />
-            <Route
-              path='/folder/main'
-              render={() => 
-                <Main 
-                  notes={STORE.notes}
                 />}
             />
           </Switch>

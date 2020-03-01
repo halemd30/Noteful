@@ -1,14 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import AddNoteForm from '../addnoteform/AddNoteForm'
+import SideBar from '../sidebar/SideBar'
 
 class Main extends React.Component {
     render() {
-        //console.log('hey there', this.props)
       return (
         <div className='main'>
+            
             <ul>
-                {this.props.notes.map((note) => {
+                {this.props.filteredNotes.map((note) => {
                     return (
                         <div key={note.id} className='note'>
                             <Link to={`/notes/${note.id}`}>{note.name}</Link>
