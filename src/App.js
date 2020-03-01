@@ -7,6 +7,7 @@ import Main from './main/Main';
 
 class App extends React.Component {
   render() {
+    // change routes and paths!
     return (
       <div className='app'>
         <h1>
@@ -14,6 +15,7 @@ class App extends React.Component {
         </h1>
         
           <Switch>
+            
             <Route
               path="/folder/:folderId"
               render={(props) => 
@@ -32,13 +34,13 @@ class App extends React.Component {
                   {...props}
                 />}
             />
-            {/* <Route
+            <Route
               path='/folder/main'
               render={() => 
                 <Main 
                   notes={STORE.notes}
                 />}
-            /> */}
+            />
           </Switch>
       </div>
     )
