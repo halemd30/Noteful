@@ -7,7 +7,7 @@ import Main from './main/Main';
 
 class App extends React.Component {
   render() {
-    // playing in the demo branch!
+    // no im really playing in the demo branch!
     return (
       <div className='app'>
         <h1>
