@@ -7,7 +7,7 @@ import Main from './main/Main';
 
 class App extends React.Component {
   render() {
-    // change routes and paths!
+    // change routes and paths, added another note!
     return (
       <div className='app'>
         <h1>
