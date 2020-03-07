@@ -2,32 +2,46 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Note from '../note/Note'
 import AddNoteForm from '../addnoteform/AddNoteForm'
+import './Main.css'
+import SideBar from '../sidebar/SideBar'
 //import { format } from 'date-fns'
 
 class Main extends React.Component {
     render() {
-      // const selectedNote = this.props.match.params.noteId  
-
+      const routeFolderId = this.props.match.params.folderId
+      let notes = this.props.notes
+      if (routeFolderId) {
+        notes = this.props.notes.filter(note => note.folderId === routeFolderId)
+      }
+      
       return (
-        <section className='main'>
-          <ul>
-            {this.props.notes.map((note) => {
-              return (
-                <li key={note.id}>
-                  <Note
-                    id={note.id}
-                    name={note.name}
-                    modified={note.modified}
-                  />
-                </li>
-              )
-            })}
-          </ul>
-          <button onClick={() => <AddNoteForm />}>Add Note</button>
-        </section>
+        <>
+          <div className='mainSidebar'>
+            <SideBar {...this.props}/>
+          </div>
+          <section className='main'>
+            
+            <ul>
+              {notes.map((note) => {
+                return (
+                  <li key={note.id}>
+                    <Note
+                      id={note.id}
+                      name={note.name}
+                      modified={note.modified}
+                    />
+                  </li>
+                )
+              })}
+            </ul>
+            <button onClick={() => <AddNoteForm />}>Add Note</button>
+          </section>
+        </>
       )
     }
   }
+
+
 
 {/* <div key={note.id} className='noteList_note'>
     <Link to={`/note/${note.id}`}>{note.name}</Link>

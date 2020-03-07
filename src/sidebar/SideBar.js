@@ -2,22 +2,17 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import AddFolderForm from '../addfolderform/AddFolderForm'
 import Main from '../main/Main'
+import './SideBar.css'
 
 class SideBar extends React.Component {
     render() {
-        const selectedFolder = this.props.match.params.folderId
-        const folderNotes = this.props.notes.filter(note => note.folderId === selectedFolder)
-
       return (
         <>
             <div className='sideBar'>
                 <ul>
                     {this.props.folders.map((folder) => {
                         return (
-                            <li 
-                                key={folder.id} 
-                                className={`${selectedFolder === folder.id ? "selected-class" : ""}`}
-                            >
+                            <li key={folder.id}>
                                 <NavLink 
                                     to={`/folder/${folder.id}`}
                                     activeStyle={{
@@ -32,7 +27,6 @@ class SideBar extends React.Component {
                 </ul>
                 <button onClick={() => <AddFolderForm />}>Add Folder</button>
             </div>
-            <Main notes={folderNotes}/>
         </>
       )
     }

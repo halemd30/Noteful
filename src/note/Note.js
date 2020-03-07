@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { notStrictEqual } from 'assert'
+import './Note.css'
 
 class Note extends React.Component {
   // const noteName = routeProps.match.params.id

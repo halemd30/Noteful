@@ -37,27 +37,30 @@ class App extends React.Component {
     
     return (
       <div className='app'>
-        <h1>
+        <h1 className='title'>
           <Link to={'/'}>Noteful</Link>
         </h1>
 
           <Switch>
-            <Route exact path='/' render={(routeProps) => (
-                <div>
-                  <SideBar 
-                    folders={STORE.folders}
-                    notes={STORE.notes} 
-                    {...routeProps}
-                  />
-                  <Main 
-                    notes={STORE.notes}
-                    {...routeProps}
-                  />
-                </div>
-              )} 
+            <Route exact path='/' render={routeProps => 
+                <Main 
+                  {...routeProps} 
+                  notes={STORE.notes} 
+                  folders={STORE.folders}
+                />
+              }
             />
 
-            <Route path="/folder/:folderId" render={(routeProps) => (
+            <Route path='/folder/:folderId' render={routeProps => (
+                <Main 
+                  folders={STORE.folders}
+                  notes={STORE.notes}
+                  {...routeProps}
+                />
+              )}
+            />
+
+            <Route path='/folder/:folderId' render={routeProps => (
                 <SideBar 
                   folders={STORE.folders} 
                   notes={STORE.notes} 
@@ -66,7 +69,7 @@ class App extends React.Component {
               )}
             />
 
-            <Route path='/note/:noteId' render={(routeProps) => (
+            <Route path='/note/:noteId' render={routeProps => (
                 <NoteMain
                   notes={STORE.notes}
                   folders={STORE.folders}
