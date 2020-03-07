@@ -4,42 +4,75 @@ import SideBar from './sidebar/SideBar';
 import STORE from './STORE';
 import './App.css';
 import Main from './main/Main';
+import NoteMain from './notemain/NoteMain';
+import Note from './note/Note'
 
 class App extends React.Component {
+  state = STORE
+
+  addNote = (note) => {
+    this.setState({
+      notes: [...this.state.notes, note]
+    })
+  }
+  
+  addFolder = (folder) => {
+    this.setState({
+      folders: [...this.state.folders, folder]
+    })
+  }
+
+  deleteCard = (id) => {
+    const newNoteList = this.state.notes.filter(note => {
+      if (id !== note.id) {
+        return note
+      }
+    })
+    this.setState({
+      notes: newNoteList
+    })
+  }
+
   render() {
-    // change routes and paths!
+    
     return (
       <div className='app'>
         <h1>
           <Link to={'/'}>Noteful</Link>
         </h1>
-        
+
           <Switch>
-            
-            <Route
-              path="/folder/:folderId"
-              render={(props) => 
+            <Route exact path='/' render={(routeProps) => (
+                <div>
+                  <SideBar 
+                    folders={STORE.folders}
+                    notes={STORE.notes} 
+                    {...routeProps}
+                  />
+                  <Main 
+                    notes={STORE.notes}
+                    {...routeProps}
+                  />
+                </div>
+              )} 
+            />
+
+            <Route path="/folder/:folderId" render={(routeProps) => (
                 <SideBar 
                   folders={STORE.folders} 
                   notes={STORE.notes} 
-                  {...props}
-                />}
+                  {...routeProps}
+                />
+              )}
             />
-            <Route
-              exact path="/"
-              render={(props) => 
-                <SideBar 
-                  folders={STORE.folders}
-                  notes={STORE.notes} 
-                  {...props}
-                />}
-            />
-            <Route
-              path='/folder/main'
-              render={() => 
-                <Main 
+
+            <Route path='/note/:noteId' render={(routeProps) => (
+                <NoteMain
                   notes={STORE.notes}
-                />}
+                  folders={STORE.folders}
+                  {...routeProps}
+                />
+              )}
             />
           </Switch>
       </div>

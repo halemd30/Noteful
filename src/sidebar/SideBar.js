@@ -6,7 +6,7 @@ import Main from '../main/Main'
 class SideBar extends React.Component {
     render() {
         const selectedFolder = this.props.match.params.folderId
-        const filteredNotes = this.props.notes.filter(note => note.folderId === selectedFolder)
+        const folderNotes = this.props.notes.filter(note => note.folderId === selectedFolder)
 
       return (
         <>
@@ -18,8 +18,13 @@ class SideBar extends React.Component {
                                 key={folder.id} 
                                 className={`${selectedFolder === folder.id ? "selected-class" : ""}`}
                             >
-                                <NavLink to=
-                                    {`/folder/${folder.id}`}>{folder.name}
+                                <NavLink 
+                                    to={`/folder/${folder.id}`}
+                                    activeStyle={{
+                                        color: 'red'
+                                    }}
+                                >
+                                    {folder.name}
                                 </NavLink>
                             </li>
                         )
@@ -27,7 +32,7 @@ class SideBar extends React.Component {
                 </ul>
                 <button onClick={() => <AddFolderForm />}>Add Folder</button>
             </div>
-            <Main notes={filteredNotes}/>
+            <Main notes={folderNotes}/>
         </>
       )
     }
