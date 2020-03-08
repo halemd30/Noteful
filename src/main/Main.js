@@ -4,6 +4,7 @@ import Note from '../note/Note'
 import AddNoteForm from '../addnoteform/AddNoteForm'
 import './Main.css'
 import SideBar from '../sidebar/SideBar'
+import NoteContext from '../NoteContext'
 //import { format } from 'date-fns'
 
 class Main extends React.Component {
@@ -14,29 +15,33 @@ class Main extends React.Component {
         notes = this.props.notes.filter(note => note.folderId === routeFolderId)
       }
       
-      return (
-        <>
-          <div className='mainSidebar'>
-            <SideBar {...this.props}/>
-          </div>
-          <section className='main'>
-            
-            <ul>
-              {notes.map((note) => {
-                return (
-                  <li key={note.id}>
-                    <Note
-                      id={note.id}
-                      name={note.name}
-                      modified={note.modified}
-                    />
-                  </li>
-                )
-              })}
-            </ul>
-            <button onClick={() => <AddNoteForm />}>Add Note</button>
-          </section>
-        </>
+      return ( 
+        <NoteContext.Consumer>
+          {(context) => 
+            <>
+              <div className='mainSidebar'>
+                <SideBar {...this.props}/>
+              </div>
+              <section className='main'>
+                
+                <ul>
+                  {notes.map((note) => {
+                    return (
+                      <li key={note.id}>
+                        <Note
+                          id={note.id}
+                          name={note.name}
+                          modified={note.modified}
+                        />
+                      </li>
+                    )
+                  })}
+                </ul>
+                <button onClick={() => <AddNoteForm />}>Add Note</button>
+              </section>
+            </>
+          }
+        </NoteContext.Consumer>
       )
     }
   }

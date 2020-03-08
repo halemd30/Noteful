@@ -5,10 +5,14 @@ import STORE from './STORE';
 import './App.css';
 import Main from './main/Main';
 import NoteMain from './notemain/NoteMain';
+import NoteContext from './NoteContext'
 import Note from './note/Note'
 
 class App extends React.Component {
-  state = STORE
+  constructor() {
+    super()
+    this.state = STORE
+  }
 
   addNote = (note) => {
     this.setState({
@@ -42,41 +46,28 @@ class App extends React.Component {
         </h1>
 
           <Switch>
-            <Route exact path='/' render={routeProps => 
-                <Main 
-                  {...routeProps} 
-                  notes={STORE.notes} 
-                  folders={STORE.folders}
-                />
-              }
-            />
+            <NoteContext.Provider value={{
+              store: this.state,
+              folders: STORE.folders,
+              notes: STORE.notes
+            }}>
+              <Route exact path='/' render={(routeProps) => 
+                <Main {...routeProps} notes={STORE.notes}/>}
+              />
 
-            <Route path='/folder/:folderId' render={routeProps => (
-                <Main 
-                  folders={STORE.folders}
-                  notes={STORE.notes}
-                  {...routeProps}
-                />
-              )}
-            />
+              <Route path='/folder/:folderId' render={routeProps => 
+                <Main {...routeProps} notes={STORE.notes}/>}
+              />
 
-            <Route path='/folder/:folderId' render={routeProps => (
-                <SideBar 
-                  folders={STORE.folders} 
-                  notes={STORE.notes} 
-                  {...routeProps}
-                />
-              )}
-            />
-
-            <Route path='/note/:noteId' render={routeProps => (
-                <NoteMain
-                  notes={STORE.notes}
-                  folders={STORE.folders}
-                  {...routeProps}
-                />
-              )}
-            />
+              <Route path='/note/:noteId' render={routeProps => 
+                  <NoteMain
+                    notes={STORE.notes}
+                    folders={STORE.folders}
+                    {...routeProps}
+                  />
+                }
+              />
+            </NoteContext.Provider>
           </Switch>
       </div>
     )
