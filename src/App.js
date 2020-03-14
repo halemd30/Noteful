@@ -6,21 +6,30 @@ import './App.css';
 import Main from './main/Main';
 import NoteMain from './notemain/NoteMain';
 import NoteContext from './NoteContext'
+import AddNoteForm from './addnoteform/AddNoteForm'
+import AddFolderForm from './addfolderform/AddFolderForm'
+//import './assets/css/fonts.css'
 import Note from './note/Note'
 
 class App extends React.Component {
   constructor() {
     super()
-    this.state = STORE
+    this.state = {
+      notes: STORE.notes,
+      folders: STORE.folders,
+      // store: STORE
+    }
   }
 
   addNote = (note) => {
+    console.log(note)
     this.setState({
       notes: [...this.state.notes, note]
     })
   }
   
   addFolder = (folder) => {
+    console.log('new folder: ', folder)
     this.setState({
       folders: [...this.state.folders, folder]
     })
@@ -38,35 +47,52 @@ class App extends React.Component {
   }
 
   render() {
-    
+    console.log()   
     return (
       <div className='app'>
-        <h1 className='title'>
-          <Link to={'/'}>Noteful</Link>
-        </h1>
+        <div className='titleContainer'>
+          <h1 className='title'>
+            <Link to={'/'}>Noteful</Link>
+          </h1>
+          <div className='titleCard1'></div>
+          <div className='titleCard2'></div>
+        </div>
+
 
           <Switch>
             <NoteContext.Provider value={{
-              store: this.state,
-              folders: STORE.folders,
-              notes: STORE.notes
+              store: this.state.store, // do I need this?
+              folders: this.state.folders, // do I need to pass this?
+              notes: this.state.notes, // do I need to pass this?
+              addNote: this.addNote,
+              addFolder: this.addFolder,
+              deleteCard: this.deleteCard,
+              // handleSubmit: this.handleSubmit
             }}>
               <Route exact path='/' render={(routeProps) => 
-                <Main {...routeProps} notes={STORE.notes}/>}
+                <Main 
+                  {...routeProps} 
+                  //notes={STORE.notes}
+                />}
               />
 
               <Route path='/folder/:folderId' render={routeProps => 
-                <Main {...routeProps} notes={STORE.notes}/>}
+                <Main 
+                  {...routeProps} 
+                  //notes={STORE.notes}
+                  />}
               />
 
               <Route path='/note/:noteId' render={routeProps => 
                   <NoteMain
-                    notes={STORE.notes}
-                    folders={STORE.folders}
                     {...routeProps}
-                  />
-                }
+                    // notes={STORE.notes}
+                    // folders={STORE.folders}
+                  />}
               />
+
+              <Route path='/noteForm' component={AddNoteForm}/>
+              <Route path='/folderForm' component={AddFolderForm}/>
             </NoteContext.Provider>
           </Switch>
       </div>

@@ -4,6 +4,7 @@ import AddFolderForm from '../addfolderform/AddFolderForm'
 import Main from '../main/Main'
 import './SideBar.css'
 import NoteContext from '../NoteContext'
+import { Link } from 'react-router-dom'
 
 class SideBar extends React.Component {
     render() {
@@ -12,14 +13,21 @@ class SideBar extends React.Component {
                 {(context) => 
                     <>
                         <div className='sideBar'>
+                            <div className='foldersTitle'>
+                                <h1>Folders</h1>
+                                <div className='foldersUnderline1'></div>
+                                <div className='foldersUnderline2'></div>
+                                <div className='foldersUnderline3'></div>
+                            </div>
                             <ul>
-                                {context.folders.map(folder => {
+                                {context.store.folders.map(folder => {
                                     return (
                                         <li key={folder.id}>
                                             <NavLink
                                                 to={`/folder/${folder.id}`}
                                                 activeStyle={{
-                                                    color: 'red'
+                                                    color: 'white',
+                                                    backgroundColor: '#49297F', 
                                                 }}
                                             >
                                                 {folder.name}
@@ -28,7 +36,9 @@ class SideBar extends React.Component {
                                     )
                                 })}
                             </ul>
-                            <button onClick={() => <AddFolderForm />}>Add Folder</button>
+                            <Link to='/folderForm'>
+                                <button className='addFolderButton' type='button'>Add Folder</button>
+                            </Link>
                         </div>
                     </>
                 }

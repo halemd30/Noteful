@@ -9,15 +9,17 @@ class Note extends React.Component {
       return (
         <NoteContext.Consumer>
           {(context) => 
-            <div className='noteList-note'>
-              <h1>
-                <Link to={`/note/${this.props.id}`}>
-                  {this.props.name}
-                </Link>
-              </h1>
-              <p>Date Modified: {this.props.modified}</p>
-              <button>Delete Note</button>
-            </div>
+          <>
+            <button className='deleteNote' onClick={() => context.deleteCard(this.props.id)}>Delete Note</button>
+            <Link to={`/note/${this.props.id}`}>
+              <div className='noteList-note'>
+                <h2>
+                  {this.props.name} 
+                </h2>
+                <p>Date Modified: {this.props.modified}</p>             
+              </div>
+            </Link>
+          </>
           }
         </NoteContext.Consumer>
       )

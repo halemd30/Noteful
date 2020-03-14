@@ -23,7 +23,12 @@ class Main extends React.Component {
                 <SideBar {...this.props}/>
               </div>
               <section className='main'>
-                
+              <div className='notesTitle'>
+                <h1>Notes</h1>
+                <div className='notesUnderline1'></div>
+                <div className='notesUnderline2'></div>
+                <div className='notesUnderline3'></div>
+              </div>
                 <ul>
                   {notes.map((note) => {
                     return (
@@ -37,7 +42,9 @@ class Main extends React.Component {
                     )
                   })}
                 </ul>
-                <button onClick={() => <AddNoteForm />}>Add Note</button>
+                <Link to='/noteForm'>
+                  <button className='addNoteButton' type='button'>Add Note</button>
+                </Link>
               </section>
             </>
           }
