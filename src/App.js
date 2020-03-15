@@ -36,11 +36,7 @@ class App extends React.Component {
   }
 
   deleteCard = (id) => {
-    const newNoteList = this.state.notes.filter(note => {
-      if (id !== note.id) {
-        return note
-      }
-    })
+    const newNoteList = this.state.notes.filter(note => note.id !== id)
     this.setState({
       notes: newNoteList
     })
@@ -61,9 +57,9 @@ class App extends React.Component {
 
           <Switch>
             <NoteContext.Provider value={{
-              store: this.state.store, // do I need this?
-              folders: this.state.folders, // do I need to pass this?
-              notes: this.state.notes, // do I need to pass this?
+              // store: this.state.store,
+              notes: this.state.notes, 
+              folders: this.state.folders, 
               addNote: this.addNote,
               addFolder: this.addFolder,
               deleteCard: this.deleteCard,

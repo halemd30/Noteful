@@ -36,6 +36,7 @@ class AddNoteForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const note = {
+      // id: unique id?
       name: this.state.noteName.value,
       content: this.state.noteDescription.value
     }

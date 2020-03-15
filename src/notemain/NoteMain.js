@@ -3,20 +3,25 @@ import Note from '../note/Note'
 import NoteContext from '../NoteContext';
 
 class NoteMain extends React.Component {
+    static contextType = NoteContext
     
     render() {
         const routeNoteId = this.props.match.params.noteId
-        const note = this.props.notes.find(note => 
+        const note = this.context.notes.find(note => 
+            // console.log('notes: ', note)
+            // create unique ID for added note
             note.id === routeNoteId
         );
         
-        const currentFolder = this.props.folders.find(folder => 
+        const currentFolder = this.context.folders.find(folder => 
+            // console.log('folders: ', folder)
+            // create unique ID for added folder
             folder.id === note.folderId
-        )
+        );
         
         return (
             <NoteContext.Consumer>
-                {(context) => 
+                {(context) =>
                     <>
                         <div className='noteSidebar'>
                             <button>Go back</button>

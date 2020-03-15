@@ -20,7 +20,7 @@ class SideBar extends React.Component {
                                 <div className='foldersUnderline3'></div>
                             </div>
                             <ul>
-                                {context.store.folders.map(folder => {
+                                {context.folders.map(folder => {
                                     return (
                                         <li key={folder.id}>
                                             <NavLink

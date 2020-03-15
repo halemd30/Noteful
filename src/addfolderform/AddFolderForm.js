@@ -1,11 +1,15 @@
 import React from 'react'
 import NoteContext from '../NoteContext'
 import './AddFolderForm.css'
+import { Link } from 'react-router-dom'
 
 class AddFolderForm extends React.Component {
+  static contextType = NoteContext
+
   constructor() {
     super()
     this.state = {
+      folderId: '', // include empty unique ID here?
       folderName: {
         value: ''
       }
@@ -21,11 +25,20 @@ class AddFolderForm extends React.Component {
     })
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const folder = {
+      // folderId: (add unique ID here?)
+      name: this.state.folderName.value
+    }
+    this.context.addFolder(folder)
+  }
+
     render() {
       return (
         <NoteContext.Consumer>
           {(context) => 
-            <form className='addFolderForm' onSubmit={e => context.addFolder(e)}>
+            <form className='addFolderForm' onSubmit={e => this.handleSubmit(e)}>
               <div className='folderFormBorder1'>
               <div className='folderFormBorder2'>
               <div className='folderFormBorder3'>
@@ -35,7 +48,8 @@ class AddFolderForm extends React.Component {
                 <input type='text' className='folderName'
                   name='folderName' id='folderName' onChange={(e) => this.updateFolderName(e.target.value)}/>
               </div>
-              <button type='submit' className='submitButton'>Add Folder</button>
+              {/* Link to '/' when button is clicked */}
+                <button type='submit' className='submitButton'>Add Folder</button>
               </div>
               </div>
               </div>
