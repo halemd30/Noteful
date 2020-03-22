@@ -28,7 +28,7 @@ class AddFolderForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const folder = {
-      // folderId: (add unique ID here?)
+      //id: add unique id? 
       name: this.state.folderName.value
     }
     this.context.addFolder(folder)

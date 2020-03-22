@@ -15,11 +15,12 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      notes: STORE.notes,
-      folders: STORE.folders,
-      // store: STORE
+      notes: [], 
+      folders: [],
     }
   }
+
+
 
   addNote = (note) => {
     console.log(note)
@@ -42,8 +43,10 @@ class App extends React.Component {
     })
   }
 
+  
+
   render() {
-    console.log()   
+    
     return (
       <div className='app'>
         <div className='titleContainer'>
@@ -63,6 +66,7 @@ class App extends React.Component {
               addNote: this.addNote,
               addFolder: this.addFolder,
               deleteCard: this.deleteCard,
+              goBack: this.goBack
               // handleSubmit: this.handleSubmit
             }}>
               <Route exact path='/' render={(routeProps) => 

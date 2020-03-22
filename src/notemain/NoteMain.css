@@ -1,0 +1,108 @@
+/* 
+fonts:
+'fugaz one' (titles)
+'marck script' (notes)
+'zilla slab' (folders)
+'quicksand' (body)
+'bellota' (buttons)
+
+colors: 
+90's
+teal #07DB96
+purple #49297F
+baby blue #90DDFF
+hot pink #E10186
+yellow #FDFB76
+
+*/
+.noteMainContainer {
+    margin: 20px;
+}
+.buttonFolderContainer {
+    display: block;
+    border: 1px solid #FEFEFE;
+}
+
+.goBackButton {
+    display: block;
+    float: left;
+    margin-left: 15px;
+    margin-top: 10px;
+    position: absolute;
+}
+
+.goBackButton button {
+    font-family: 'bellota';
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #272324;
+    margin: 10px;
+    text-align: left;
+}
+
+.goBackButton button:hover {
+    background-color: #49297F;
+    color: white;
+    cursor: pointer;
+}
+
+.deleteNoteMain {
+    font-family: 'bellota';
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 5px;
+    border: 1px solid #E10186;
+    font-weight: 600;
+    float: right;
+    margin-right: 20px;
+}
+
+.deleteNoteMain:hover {
+    background-color: #E10186;
+    cursor: pointer;
+    color: white;
+}
+
+.noteFolder {
+    display: block;
+    text-align: center;
+}
+
+.noteFolder h2 {
+    font-family: zilla slab;
+    font-weight: 100;
+}
+
+.noteMainBorder {
+    clear: left;
+    display: block;
+    border: 3px solid #49297F;
+    border-radius: 10px;
+}
+
+.noteCard {
+    //background-color: #FDFB76;
+}
+
+.noteCard h1 {
+    font-family: marck script;
+    color: #49297F;
+    font-size: 42px;
+    padding-left: 30px;
+}
+
+.noteMainUnderline1 {
+    height: 10px;
+    width: 90vw;
+    margin: auto;
+    background-color: #E10186;
+}
+
+.noteMainUnderline2 {
+    height: 5px;
+    width: 90vw;
+    margin: auto;
+    background-color: #07DB96;
+} 
