@@ -17,7 +17,8 @@ class App extends React.Component {
     this.state = {
       notes: STORE.notes,
       folders: STORE.folders,
-      // store: STORE
+      // notes: [],
+      // folders: [],
     }
   }
 
@@ -40,6 +41,10 @@ class App extends React.Component {
     this.setState({
       notes: newNoteList
     })
+  }
+
+  componentDidMount() {
+    fetch()
   }
 
   render() {
@@ -82,8 +87,8 @@ class App extends React.Component {
               <Route path='/note/:noteId' render={routeProps => 
                   <NoteMain
                     {...routeProps}
-                    // notes={STORE.notes}
-                    // folders={STORE.folders}
+                    notes={STORE.notes}
+                    folders={STORE.folders}
                   />}
               />
 
