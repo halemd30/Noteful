@@ -2,9 +2,21 @@ import React from 'react'
 import Note from '../note/Note'
 import NoteContext from '../NoteContext';
 
+//function handleDelete()
+
 class NoteMain extends React.Component {
     static contextType = NoteContext
+
+//     function handleDeleteRequest(deleteNote, noteId) {
     
+//     fetch(`http://localhost:9090/${notes}`), {
+//         method: 'DELETE',
+//         headers: {
+//             'content-type': 'application/json'
+//         }
+//     }
+// }
+
     render() {
         const routeNoteId = this.props.match.params.noteId
         const note = this.context.notes.find(note => 

@@ -15,10 +15,8 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      notes: STORE.notes,
-      folders: STORE.folders,
-      // notes: [],
-      // folders: [],
+      notes: [],
+      folders: [],
     }
   }
 
@@ -31,23 +29,56 @@ class App extends React.Component {
   
   addFolder = (folder) => {
     console.log('new folder: ', folder)
+    // post request to the server
+    // 
     this.setState({
       folders: [...this.state.folders, folder]
     })
   }
 
-  deleteCard = (id) => {
-    const newNoteList = this.state.notes.filter(note => note.id !== id)
+  deleteNote = (noteId) => {
+    const newNoteList = this.state.notes.filter(note => note.id !== noteId)
     this.setState({
       notes: newNoteList
     })
   }
 
+  deleteFolder = (folderId) => {
+    const newFolderList = this.state.folders.filter(folder => folder.id !== folderId)
+    this.setState({
+      folders: newFolderList
+    })
+  }
+
   componentDidMount() {
-    fetch()
+    // batch request?
+    Promise.all([this.fetchData('folders'), this.fetchData('notes')])
+      .then(res => res.json())
+      .catch(err => console.log(err))
+  }
+
+  fetchData = type => {
+    // type = 'notes' or 'folders'
+    return fetch(`http://localhost:9090/${type}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setState({
+          [type]: data
+        })
+      })
+      .catch(err => console.log(err))
   }
 
   render() {
+    const contextValue = {
+      notes: this.state.notes, 
+      folders: this.state.folders, 
+      addNote: this.addNote,
+      addFolder: this.addFolder,
+      deleteCard: this.deleteCard,
+    }
+
     console.log()   
     return (
       <div className='app'>
@@ -59,41 +90,28 @@ class App extends React.Component {
           <div className='titleCard2'></div>
         </div>
 
-
           <Switch>
-            <NoteContext.Provider value={{
-              // store: this.state.store,
-              notes: this.state.notes, 
-              folders: this.state.folders, 
-              addNote: this.addNote,
-              addFolder: this.addFolder,
-              deleteCard: this.deleteCard,
-              // handleSubmit: this.handleSubmit
-            }}>
-              <Route exact path='/' render={(routeProps) => 
-                <Main 
-                  {...routeProps} 
-                  //notes={STORE.notes}
-                />}
+            <NoteContext.Provider value={contextValue}>
+              <Route 
+                exact path='/' 
+                component={Main}
               />
-
-              <Route path='/folder/:folderId' render={routeProps => 
-                <Main 
-                  {...routeProps} 
-                  //notes={STORE.notes}
-                  />}
+              <Route 
+                path='/folder/:folderId'
+                component={Main}
               />
-
-              <Route path='/note/:noteId' render={routeProps => 
-                  <NoteMain
-                    {...routeProps}
-                    notes={STORE.notes}
-                    folders={STORE.folders}
-                  />}
+              <Route 
+                path='/note/:noteId' 
+                component={NoteMain}
               />
-
-              <Route path='/noteForm' component={AddNoteForm}/>
-              <Route path='/folderForm' component={AddFolderForm}/>
+              <Route 
+                path='/noteForm' 
+                component={AddNoteForm}
+              />
+              <Route 
+                path='/folderForm' 
+                component={AddFolderForm}
+              />
             </NoteContext.Provider>
           </Switch>
       </div>

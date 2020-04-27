@@ -10,7 +10,7 @@ class Note extends React.Component {
         <NoteContext.Consumer>
           {(context) => 
           <>
-            <button className='deleteNote' onClick={() => context.deleteCard(this.props.id)}>Delete Note</button>
+            <button className='deleteNote' onClick={() => context.deleteNote(this.props.id)}>Delete Note</button>
             <Link to={`/note/${this.props.id}`}>
               <div className='noteList-note'>
                 <h2>
