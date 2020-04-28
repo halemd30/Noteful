@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   addNote = (note) => {
-    console.log(note)
+    //console.log(note)
     this.setState({
       notes: [...this.state.notes, note]
     })
@@ -37,16 +37,16 @@ class App extends React.Component {
   }
 
   deleteNote = (noteId) => {
-    const newNoteList = this.state.notes.filter(note => note.id !== noteId)
+    const newNotes = this.state.notes.filter(note => note.id !== noteId)
     this.setState({
-      notes: newNoteList
+      notes: newNotes
     })
   }
 
   deleteFolder = (folderId) => {
-    const newFolderList = this.state.folders.filter(folder => folder.id !== folderId)
+    const newFolders = this.state.folders.filter(folder => folder.id !== folderId)
     this.setState({
-      folders: newFolderList
+      folders: newFolders
     })
   }
 
@@ -76,7 +76,8 @@ class App extends React.Component {
       folders: this.state.folders, 
       addNote: this.addNote,
       addFolder: this.addFolder,
-      deleteCard: this.deleteCard,
+      deleteNote: this.deleteNote,
+      deleteFolder: this.deleteFolder
     }
 
     console.log()   
