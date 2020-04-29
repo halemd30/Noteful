@@ -12,16 +12,16 @@ import AddFolderForm from './addfolderform/AddFolderForm'
 import Note from './note/Note'
 
 class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
+
+    state = {
       notes: [],
       folders: [],
     }
-  }
 
   addNote = (note) => {
-    //console.log(note)
+    console.log(note)
+    // post request to the server
+    
     this.setState({
       notes: [...this.state.notes, note]
     })
@@ -30,7 +30,7 @@ class App extends React.Component {
   addFolder = (folder) => {
     console.log('new folder: ', folder)
     // post request to the server
-    // 
+    
     this.setState({
       folders: [...this.state.folders, folder]
     })

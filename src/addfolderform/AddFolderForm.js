@@ -6,30 +6,21 @@ import { Link } from 'react-router-dom'
 class AddFolderForm extends React.Component {
   static contextType = NoteContext
 
-  constructor() {
-    super()
-    this.state = {
-      folderId: '', // include empty unique ID here?
-      folderName: {
-        value: ''
-      }
+    state = {
+      folderName: ''
     }
-  }
 
-  updateFolderName = (folderName) => {
-    console.log(folderName)
+  handleInputChange = e => {
+    console.log(e)
     this.setState({
-      folderName: {
-        value: folderName
-      }
+      [e.target.name]: e.target.value
     })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
     const folder = {
-      // folderId: (add unique ID here?)
-      name: this.state.folderName.value
+      name: this.state.folderName
     }
     this.context.addFolder(folder)
   }
@@ -46,7 +37,7 @@ class AddFolderForm extends React.Component {
               <div className='formGroup'>
                 <label htmlFor='folderName'>Name your folder:</label>
                 <input type='text' className='folderName'
-                  name='folderName' id='folderName' onChange={(e) => this.updateFolderName(e.target.value)}/>
+                  name='folderName' id='folderName' value={this.state.folderName} onChange={(e) => this.handleInputChange(e)}/>
               </div>
               {/* Link to '/' when button is clicked */}
                 <button type='submit' className='submitButton'>Add Folder</button>

@@ -4,46 +4,24 @@ import NoteContext from '../NoteContext'
 class AddNoteForm extends React.Component {
   static contextType = NoteContext;
 
-  constructor() {
-    super()
-    this.state = {
-      noteName: {
-        value: ''
-      },
-      noteDescription: {
-        value: ''
-      }
+    state = {
+      noteName: '',
+      noteDescription: ''
     }
-  }
 
-  updateNoteName = (noteName) => {
-    console.log(noteName)
+  handleInputChange = e => {
     this.setState({
-      noteName: {
-        value: noteName
-      }
+      [e.target.name]: e.target.value 
     })
-  }
-
-  updateNoteDescription = (description) => {
-    this.setState({
-      noteDescription: {
-        value: description
-      }
-    })
-  }
+  }  
  
   handleSubmit = (e) => {
     e.preventDefault()
     const note = {
-      // id: unique id?
-      name: this.state.noteName.value,
-      content: this.state.noteDescription.value
+      name: this.state.noteName,
+      content: this.state.noteDescription
     }
     this.context.addNote(note)
-    // const { notes, folders } = this.state
-    // console.log('new note: ', notes.value)
-    // console.log('new folder: ', folders.value)
   }
 
     render() {
@@ -54,12 +32,12 @@ class AddNoteForm extends React.Component {
               <div className='formGroup'>
                 <label htmlFor='noteName'>Name your note: </label>
                 <input type='text' className='noteName'
-                  name='noteName' id='noteName' onChange={(e) => this.updateNoteName(e.target.value)}/>
+                  name='noteName' id='noteName' value={this.state.noteName} onChange={(e) => this.handleInputChange(e)}/>
               </div>
               <div className='formGroup'>
                 <label htmlFor='noteDescription'>Description: </label>
                 <input type='text' className='noteDescription'
-                  name='noteDescription' id='noteDescription' onChange={(e) => this.updateNoteDescription(e.target.value)}/>
+                  name='noteDescription' id='noteDescription' value={this.state.noteDescription} onChange={(e) => this.handleInputChange(e)}/>
               </div>
               <button type='submit' className='submitButton'>Add Note</button>
             </form>
