@@ -55,16 +55,4 @@ class Main extends React.Component {
   }
 }
 
-
-
-{/* <div key={note.id} className='noteList_note'>
-    <Link to={`/note/${note.id}`}>{note.name}</Link>
-    <p>Date Modified: {note.modified}
-      <span className='date'> 
-        {format(note.modified, 'dd-MM-yyyy')}
-      </span>
-    </p>
-    <button>Delete Note</button>
-</div> */}
-
 export default Main

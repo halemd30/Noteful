@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { withRouter, Route, Switch, Link } from 'react-router-dom';
 import SideBar from './sidebar/SideBar';
 import STORE from './STORE';
 import './App.css';
@@ -10,8 +10,10 @@ import AddNoteForm from './addnoteform/AddNoteForm'
 import AddFolderForm from './addfolderform/AddFolderForm'
 //import './assets/css/fonts.css'
 import Note from './note/Note'
+import NoteBoundary from './NoteBoundary';
 
 class App extends React.Component {
+static contextType = NoteContext
 
     state = {
       notes: [],
@@ -21,19 +23,38 @@ class App extends React.Component {
   addNote = (note) => {
     console.log(note)
     // post request to the server
-    
-    this.setState({
-      notes: [...this.state.notes, note]
+    fetch(`http://localhost:9090/notes`, {
+      method: 'POST',
+      body: JSON.stringify(note)
     })
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        this.setState({
+          notes: [...this.state.notes, note]
+        })
+        this.props.history.push('/')
+      })
   }
   
   addFolder = (folder) => {
     console.log('new folder: ', folder)
     // post request to the server
-    
-    this.setState({
-      folders: [...this.state.folders, folder]
+    fetch('http://localhost:9090/folders', {
+      method: 'POST',
+      body: JSON.stringify(folder)
     })
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        this.setState({
+          folders: [...this.state.folders, folder]
+        })
+        this.props.history.push('/')    
+      })
+    
   }
 
   deleteNote = (noteId) => {
@@ -93,26 +114,28 @@ class App extends React.Component {
 
           <Switch>
             <NoteContext.Provider value={contextValue}>
-              <Route 
-                exact path='/' 
-                component={Main}
-              />
-              <Route 
-                path='/folder/:folderId'
-                component={Main}
-              />
-              <Route 
-                path='/note/:noteId' 
-                component={NoteMain}
-              />
-              <Route 
-                path='/noteForm' 
-                component={AddNoteForm}
-              />
-              <Route 
-                path='/folderForm' 
-                component={AddFolderForm}
-              />
+              <NoteBoundary>
+                <Route 
+                  exact path='/' 
+                  component={Main}
+                />
+                <Route 
+                  path='/folder/:folderId'
+                  component={Main}
+                />
+                <Route 
+                  path='/note/:noteId' 
+                  component={NoteMain}
+                />
+                <Route 
+                  path='/noteForm' 
+                  component={AddNoteForm}
+                />
+                <Route 
+                  path='/folderForm' 
+                  component={AddFolderForm}
+                />
+              </NoteBoundary>
             </NoteContext.Provider>
           </Switch>
       </div>
@@ -120,4 +143,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

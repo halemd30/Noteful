@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { notStrictEqual } from 'assert'
 import './Note.css'
 import NoteContext from '../NoteContext'
+import PropTypes from 'prop-types'
 
 class Note extends React.Component {
     render() {
@@ -24,6 +25,18 @@ class Note extends React.Component {
         </NoteContext.Consumer>
       )
     }
+  }
+
+  Note.propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    modified: propTypes.string.isRequired
+  }
+
+  Note.defaultProps = {
+    id: '',
+    name: '',
+    modified: '',
   }
 
 export default Note
