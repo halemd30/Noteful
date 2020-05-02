@@ -32,6 +32,7 @@ class AddNoteForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const note = {
+      folderId: this.context.folders.find(folder => folder.id === this.state.folderDropdown.value),
       name: this.state.noteName.value,
       content: this.state.noteDescription.value
     }
@@ -57,7 +58,7 @@ class AddNoteForm extends React.Component {
                 
                 <select name='folderDropdown' onChange={e => this.handleInputChange(e)} id='folderDropdown'>
                   {context.folders.map((folder) => 
-                    <option value={folder.name} key={folder.id}>{folder.name}</option>
+                    <option value={folder.id} key={folder.id}>{folder.name}</option>
                   )}
                 </select>
               </div>
@@ -65,7 +66,7 @@ class AddNoteForm extends React.Component {
               <div className='formGroup'>
                 <label htmlFor='noteName'>Name your note: </label>
                 <input type='text' className='noteName'
-                  name='noteName' id='noteName' value={this.state.noteName.value} onChange={(e) => this.handleInputChange(e)}/>
+                  name='noteName' id='noteName' value={this.state.noteName.value} onChange={(e) => this.handleInputChange(e)} required/>
                   {this.state.noteName.touched && (
                     <ValidationError message={this.validateNoteName}/>
                   )}  
@@ -74,7 +75,7 @@ class AddNoteForm extends React.Component {
               <div className='formGroup'>
                 <label htmlFor='noteDescription'>Description: </label>
                 <input type='text' className='noteDescription'
-                  name='noteDescription' id='noteDescription' value={this.state.noteDescription.value} onChange={(e) => this.handleInputChange(e)}/>
+                  name='noteDescription' id='noteDescription' value={this.state.noteDescription.value} onChange={(e) => this.handleInputChange(e)} required/>
               </div>
               <button type='submit' className='submitButton'>Add Note</button>
 

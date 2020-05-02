@@ -10,7 +10,7 @@ import AddNoteForm from './addnoteform/AddNoteForm'
 import AddFolderForm from './addfolderform/AddFolderForm'
 //import './assets/css/fonts.css'
 import Note from './note/Note'
-import NoteBoundary from './NoteBoundary';
+import ErrorBoundary from './ErrorBoundary';
 
 class App extends React.Component {
 static contextType = NoteContext
@@ -31,11 +31,13 @@ static contextType = NoteContext
         return res.json()
       })
       .then(data => {
+        console.log(data)
         this.setState({
           notes: [...this.state.notes, note]
         })
         this.props.history.push('/')
       })
+      .catch(err => console.log(err))
   }
   
   addFolder = (folder) => {
@@ -114,7 +116,7 @@ static contextType = NoteContext
 
           <Switch>
             <NoteContext.Provider value={contextValue}>
-              <NoteBoundary>
+              <ErrorBoundary>
                 <Route 
                   exact path='/' 
                   component={Main}
@@ -135,7 +137,7 @@ static contextType = NoteContext
                   path='/folderForm' 
                   component={AddFolderForm}
                 />
-              </NoteBoundary>
+              </ErrorBoundary>
             </NoteContext.Provider>
           </Switch>
       </div>

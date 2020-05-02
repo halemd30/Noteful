@@ -30,7 +30,7 @@ class Note extends React.Component {
   Note.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    modified: propTypes.string.isRequired
+    modified: PropTypes.string.isRequired
   }
 
   Note.defaultProps = {

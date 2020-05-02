@@ -22,7 +22,12 @@ class AddFolderForm extends React.Component {
     const folder = {
       name: this.state.folderName
     }
-    this.context.addFolder(folder)
+    if (folder.name) {
+      this.context.addFolder(folder)  
+    } else {
+      alert('folder name is empty')
+    }
+    
   }
 
     render() {
@@ -37,7 +42,7 @@ class AddFolderForm extends React.Component {
               <div className='formGroup'>
                 <label htmlFor='folderName'>Name your folder:</label>
                 <input type='text' className='folderName'
-                  name='folderName' id='folderName' value={this.state.folderName} onChange={(e) => this.handleInputChange(e)}/>
+                  name='folderName' id='folderName' value={this.state.folderName} onChange={(e) => this.handleInputChange(e)} required/>
               </div>
               {/* Link to '/' when button is clicked */}
                 <button type='submit' className='submitButton'>Add Folder</button>
