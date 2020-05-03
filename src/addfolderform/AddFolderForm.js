@@ -1,7 +1,7 @@
 import React from 'react'
 import NoteContext from '../NoteContext'
 import './AddFolderForm.css'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 
 class AddFolderForm extends React.Component {
   static contextType = NoteContext
@@ -11,7 +11,6 @@ class AddFolderForm extends React.Component {
     }
 
   handleInputChange = e => {
-    console.log(e)
     this.setState({
       [e.target.name]: e.target.value
     })

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Note from '../note/Note'
-import AddNoteForm from '../addnoteform/AddNoteForm'
+//import AddNoteForm from '../addnoteform/AddNoteForm'
 import './Main.css'
 import SideBar from '../sidebar/SideBar'
 import NoteContext from '../NoteContext'
@@ -16,7 +16,6 @@ class Main extends React.Component {
     if (routeFolderId) {
       notes = this.context.notes.filter(note => note.folderId === routeFolderId)
     }
-    
     return ( 
       <NoteContext.Consumer>
         {(context) => 

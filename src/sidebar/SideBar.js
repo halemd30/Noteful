@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import AddFolderForm from "../addfolderform/AddFolderForm";
-import Main from "../main/Main";
+//import AddFolderForm from "../addfolderform/AddFolderForm";
+//import Main from "../main/Main";
 import "./SideBar.css";
 import NoteContext from "../NoteContext";
 import { Link } from "react-router-dom";

@@ -14,13 +14,11 @@ class AddNoteForm extends React.Component {
         value: '',
       },
       folderDropdown: {
-        value: '',
+        value: 'important',
       }
     }
 
   handleInputChange = e => {
-    console.log(e.target.name)
-    console.log(e.target.value)
     this.setState({
       [e.target.name]: {
         value: e.target.value,
@@ -32,7 +30,8 @@ class AddNoteForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const note = {
-      folderId: this.context.folders.find(folder => folder.id === this.state.folderDropdown.value),
+      id: this.state.folderDropdown.value,
+      //folderId: this.context.folders.find(folder => folder.id === this.state.folderDropdown.value),
       name: this.state.noteName.value,
       content: this.state.noteDescription.value
     }
@@ -41,7 +40,6 @@ class AddNoteForm extends React.Component {
 
   validateNoteName = () => {
     const noteName = this.state.noteName.value.trim()
-    console.log(noteName)
     if (noteName.length === 0) {
       return 'A name is required'
     } 
@@ -68,7 +66,7 @@ class AddNoteForm extends React.Component {
                 <input type='text' className='noteName'
                   name='noteName' id='noteName' value={this.state.noteName.value} onChange={(e) => this.handleInputChange(e)} required/>
                   {this.state.noteName.touched && (
-                    <ValidationError message={this.validateNoteName}/>
+                    <ValidationError message={this.validateNoteName()}/>
                   )}  
               </div>
 

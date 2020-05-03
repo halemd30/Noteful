@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { notStrictEqual } from 'assert'
+//import { notStrictEqual } from 'assert'
 import './Note.css'
 import NoteContext from '../NoteContext'
 import PropTypes from 'prop-types'
