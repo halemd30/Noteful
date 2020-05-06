@@ -70,22 +70,24 @@ static contextType = NoteContext
     })
   }
 
-  componentDidMount() {
-    // batch request?
-    this.fetchData('folders')
-    this.fetchData('notes')
-  }
-
   fetchData = type => {
+    
     // type = 'notes' or 'folders'
     return fetch(`${config.API_ENDPOINT}${type}`)
       .then(res => res.json())
       .then(data => {
+        console.log(data)
         this.setState({
           [type]: data
         })
       })
       .catch(err => console.log(err))
+  }
+  
+  componentDidMount() {
+    // batch request?
+    this.fetchData('folders')
+    this.fetchData('notes')
   }
 
   render() {
