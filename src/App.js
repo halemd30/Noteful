@@ -24,6 +24,9 @@ class App extends React.Component {
   addNote = (note) => {
     fetch(`${config.API_ENDPOINT}notes`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(note),
     })
       .then((res) => {
@@ -31,7 +34,7 @@ class App extends React.Component {
       })
       .then((data) => {
         this.setState({
-          notes: [...this.state.notes, note],
+          notes: [...this.state.notes, data],
         });
         this.props.history.push("/");
       })
@@ -42,6 +45,9 @@ class App extends React.Component {
     // post request to the server
     fetch(`${config.API_ENDPOINT}folders`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(folder),
     })
       .then((res) => {
@@ -49,7 +55,7 @@ class App extends React.Component {
       })
       .then((data) => {
         this.setState({
-          folders: [...this.state.folders, folder],
+          folders: [...this.state.folders, data],
         });
         this.props.history.push("/");
       });
@@ -57,9 +63,27 @@ class App extends React.Component {
 
   deleteNote = (noteId) => {
     const newNotes = this.state.notes.filter((note) => note.id !== noteId);
-    this.setState({
-      notes: newNotes,
-    });
+
+    fetch(`${config.API_ENDPOINT}note/${noteId}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${config.API_KEY}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((error) => {
+            throw error;
+          });
+        }
+        console.log("delete response", res.json());
+      })
+      .then(() => {
+        this.setState({
+          notes: newNotes,
+        });
+      });
   };
 
   deleteFolder = (folderId) => {

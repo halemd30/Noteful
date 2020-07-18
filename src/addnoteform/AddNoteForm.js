@@ -32,9 +32,8 @@ class AddNoteForm extends React.Component {
     if (this.state.folderDropdown.value) {
       let today = new Date();
       const note = {
-        id: `${this.context.notes.length}`,
-        folderId: this.state.folderDropdown.value,
-        name: this.state.noteName.value,
+        folder_id: this.state.folderDropdown.value,
+        note_name: this.state.noteName.value,
         content: this.state.noteDescription.value,
         modified: today.toISOString(),
       };
@@ -67,7 +66,7 @@ class AddNoteForm extends React.Component {
                 <option value={null}>Select Folder...</option>
                 {context.folders.map((folder) => (
                   <option value={folder.id} key={folder.id}>
-                    {folder.name}
+                    {folder.folder_name}
                   </option>
                 ))}
               </select>

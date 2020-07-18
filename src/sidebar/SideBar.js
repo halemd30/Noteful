@@ -30,7 +30,7 @@ class SideBar extends React.Component {
                           backgroundColor: "#49297F",
                         }}
                       >
-                        {folder.name}
+                        {folder.folder_name}
                       </NavLink>
                     </li>
                   );

@@ -20,20 +20,22 @@ class NoteMain extends React.Component {
 
   render() {
     const routeNoteId = this.props.match.params.noteId;
-    const note = this.context.notes.find((note) => note.id === routeNoteId);
+    const note = this.context.notes.find(
+      (note) => note.id === Number(routeNoteId)
+    );
 
     const currentFolder = note
-      ? this.context.folders.find((folder) => folder.id === note.folderId)
+      ? this.context.folders.find((folder) => folder.id === note.folder_id)
       : {};
 
     return note ? (
       <>
         <div className="noteSidebar">
           <button onClick={() => this.props.history.goBack()}>Go back</button>
-          <h2>{currentFolder.name}</h2>
+          <h2>{currentFolder.folder_name}</h2>
         </div>
         <div className="noteCard">
-          <h1>{note.name}</h1>
+          <h1>{note.note_name}</h1>
           <p>{note.modified}</p>
           <button>Delete Note</button>
         </div>
