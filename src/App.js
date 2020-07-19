@@ -64,7 +64,7 @@ class App extends React.Component {
   deleteNote = (noteId) => {
     const newNotes = this.state.notes.filter((note) => note.id !== noteId);
 
-    fetch(`${config.API_ENDPOINT}note/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}notes/${noteId}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -77,7 +77,7 @@ class App extends React.Component {
             throw error;
           });
         }
-        console.log("delete response", res.json());
+        //console.log("delete response", res.json());
       })
       .then(() => {
         this.setState({
