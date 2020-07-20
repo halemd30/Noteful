@@ -19,41 +19,37 @@ class Main extends React.Component {
       );
     }
     return (
-      <NoteContext.Consumer>
-        {(context) => (
-          <>
-            <div className="mainSidebar">
-              <SideBar {...this.props} />
-            </div>
-            <section className="main">
-              <div className="notesTitle">
-                <h1>Notes</h1>
-                <div className="notesUnderline1"></div>
-                <div className="notesUnderline2"></div>
-                <div className="notesUnderline3"></div>
-              </div>
-              <ul>
-                {notes.map((note) => {
-                  return (
-                    <li key={note.id}>
-                      <Note
-                        id={note.id}
-                        name={note.note_name}
-                        modified={note.modified}
-                      />
-                    </li>
-                  );
-                })}
-              </ul>
-              <Link to="/noteForm">
-                <button className="addNoteButton" type="button">
-                  Add Note
-                </button>
-              </Link>
-            </section>
-          </>
-        )}
-      </NoteContext.Consumer>
+      <>
+        <div className="mainSidebar">
+          <SideBar {...this.props} />;
+        </div>
+        <section className="main">
+          <div className="notesTitle">
+            <h1>Notes</h1>
+            <div className="notesUnderline1"></div>
+            <div className="notesUnderline2"></div>
+            <div className="notesUnderline3"></div>
+          </div>
+          <ul>
+            {notes.map((note) => {
+              return (
+                <li key={note.id}>
+                  <Note
+                    id={note.id}
+                    name={note.note_name}
+                    modified={note.modified}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+          <Link to="/noteForm">
+            <button className="addNoteButton" type="button">
+              Add Note
+            </button>
+          </Link>
+        </section>
+      </>
     );
   }
 }

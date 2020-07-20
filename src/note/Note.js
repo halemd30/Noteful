@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./Note.css";
 import NoteContext from "../NoteContext";
 import PropTypes from "prop-types";
+import Basket from "../images/basket.png";
 
 class Note extends React.Component {
   render() {
@@ -15,7 +16,7 @@ class Note extends React.Component {
               className="deleteNote"
               onClick={() => context.deleteNote(this.props.id)}
             >
-              Delete Note
+              <img alt="delete" src={Basket} width="24"></img>
             </button>
             <Link to={`/note/${this.props.id}`}>
               <div className="noteList-note">

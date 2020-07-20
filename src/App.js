@@ -90,9 +90,20 @@ class App extends React.Component {
     const newFolders = this.state.folders.filter(
       (folder) => folder.id !== folderId
     );
-    this.setState({
-      folders: newFolders,
-    });
+    fetch(`${config.API_ENDPOINT}folders/${folderId}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .then(() => {
+        this.setState({
+          folders: newFolders,
+        });
+      });
   };
 
   fetchData = (type) => {

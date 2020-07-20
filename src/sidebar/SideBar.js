@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import "./SideBar.css";
 import NoteContext from "../NoteContext";
 import { Link } from "react-router-dom";
+import Basket from "../images/basket.png";
 
 class SideBar extends React.Component {
   render() {
@@ -31,6 +32,13 @@ class SideBar extends React.Component {
                         }}
                       >
                         {folder.folder_name}
+                        <button
+                          onClick={() => {
+                            context.deleteFolder(folder.id);
+                          }}
+                        >
+                          <img alt="delete" src={Basket} width="22"></img>
+                        </button>
                       </NavLink>
                     </li>
                   );
