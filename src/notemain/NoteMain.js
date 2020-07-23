@@ -37,16 +37,13 @@ class NoteMain extends React.Component {
         <div className="noteCard">
           <h1>{note.note_name}</h1>
           <p>{note.modified}</p>
-          {this.context.notes.map((note) => {
-            return (
-              <button
-                key={note.id}
-                onClick={() => this.context.deleteNote(note.id)}
-              >
-                Delete Note
-              </button>
-            );
-          })}
+
+          <button
+            key={note.id}
+            onClick={() => this.context.deleteNote(note.id)}
+          >
+            Delete Note
+          </button>
         </div>
         <div className="content">{note.content}</div>
       </>
